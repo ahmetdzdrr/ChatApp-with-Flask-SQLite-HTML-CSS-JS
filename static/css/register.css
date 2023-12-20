@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    background: transparent;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    z-index: 99;
+}
+
+.logo-div {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 30px;
+    user-select: none;
+    background: transparent;
+}
+
+
+.logo-title {
+    font-size: 1.1em;
+    color: #fff;
+    background: transparent;
+    position: relative;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.rainbow-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(54, 54, 165);
+}
+
+.navigation {
+    background: transparent;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    background: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    right: 0px;
+    bottom: -6px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after {
+    transform-origin: left;
+   transform: scaleX(1);
+}
+
+.navigation .login,
+.navigation .register {
+    justify-content: space-between;
+    width: 160px;
+    height: 50px;
+    background: #000;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+    position: relative;
+    padding-left: 30px;
+}
+
+.navigation .login ion-icon {
+    color: #fff;
+    font-size: 25px;
+    position: absolute;
+    left: 25px;
+}
+
+.navigation .register ion-icon {
+    margin-top: 3px;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    left: 25px;
+}
+
+.navigation .login:hover,
+.navigation .register:hover {
+    font-size: 600;
+    background: rgb(54, 54, 165);
+}
+
+
+.login-form-container {
+    position: absolute; 
+    width: 400px;
+    height: 500px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    top: 55%; 
+    left: 25%; 
+    transform: translate(-50%, -50%);
+}
+
+
+
+.title h2 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #000;
+    text-align: center;
+}
+
+.form-group {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    border-bottom: 2px solid #000;
+    margin: 15px 0px;
+    background: transparent;
+}
+
+
+.form-group input#username,
+.form-group input#user_mail {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 15px 0 5px;
+}
+
+.form-group input#password,
+.form-group input#re_password {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 45px 0 5px;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+   -webkit-transition-delay: 9999s;
+   transition-delay: 9999s;
+
+}
+
+input::placeholder {
+    font-weight: 600;
+    opacity: 0.2;
+    color: rgb(0, 0, 0);
+  }
+
+.form-group .icon {
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    font-size: 1.2em;
+    color:  #000;
+    line-height: 57px;
+}
+
+
+#reg_showPassword {
+    position: absolute;
+    top: 40%;
+    right: 0px;
+    transform: translateY(-50%);
+}
+
+#reg_showPassword img {
+    cursor: pointer;
+    margin-top: 27px;
+    width: 20px;
+    margin-right: 10px;
+    height: 20px;
+}
+
+#reg_show_rePassword {
+    position: absolute;
+    top: 40%;
+    right: 0px;
+    transform: translateY(-50%);
+}
+
+#reg_show_rePassword img {
+    cursor: pointer;
+    margin-top: 27px;
+    width: 20px;
+    margin-right: 10px;
+    height: 20px;
+}
+
+ion-icon[name="checkmark"] {
+    background-color: rgb(0, 255, 0);
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 7px;
+    font-size: 24px;
+    color: rgb(255, 255, 255); 
+    font-weight: 600;
+    top: 45%;
+}
+
+ion-icon[name="close"] {
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 7px;
+    font-size: 24px;
+    color: rgb(255, 255, 255); 
+    font-weight: 600;
+    top: 45%;
+}
+
+
+.confirm {
+    text-decoration: none;
+    font-size: 600;
+    color: #00000077;
+    transition: .2s;
+}
+
+.confirm:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+
+.register {
+    margin-top: 15px;
+    width: 100%;
+    height: 45px;
+    background: #000;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 600;
+    margin-right: 20px;
+    transition: .3s;
+    margin-bottom: 10px;
+}
+
+.register:hover {
+    font-size: 600;
+    background: rgb(54, 54, 165);
+}
+
+
+.register-link {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.register-link p {
+    font-size: 14px;
+}
+
+.register-link a {
+    margin-left: 10px;
+    text-decoration: underline;
+    font-size: 500;
+    color: #000000;
+}
+

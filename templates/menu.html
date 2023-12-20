@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/menu.css') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/chat.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>Menu</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <script>
+      Swal.fire({
+        title: "{{ message }}",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    </script>
+    {% elif category == 'success' %}
+    <script>
+      Swal.fire({
+        title: "{{ message }}",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    </script>
+    <script>
+      document
+        .getElementById("logout-link")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          Swal.fire({
+            title: "{{ message }}",
+            icon: "{{ category  }}",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        });
+    </script>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <header id="welcome-header" class="slide-down">
+      <p style="color: #fff; font-weight: bold">
+        Welcome to FastChat <span id="username">{{ user.username }}!</span>
+      </p>
+    </header>
+    <aside class="sidebar">
+      <span class="logo-div">
+        <img
+          class="logo"
+          src="{{ url_for('static', filename='images/chat.png') }}"
+          alt=""
+        />
+      </span>
+      <ul class="links">
+        <li>
+          <a href="/menu"
+            ><span class="material-symbols-outlined"> home </span>
+            <span class="nav-name">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="/menu" id="chats"
+            ><span class="material-symbols-outlined"> stream_apps </span>
+            <span class="nav-name">Chats</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> description </span>
+            <span class="nav-name">About</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> call </span>
+            <span class="nav-name">Contact</span>
+          </a>
+        </li>
+        <li>
+          <a href="/menu"
+            ><span class="material-symbols-outlined"> settings </span>
+            <span class="nav-name">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="/logout" id="logout-link"
+            ><span class="material-symbols-outlined"> logout </span>
+            <span class="nav-name">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <div id="roomPopup" class="room-popup">
+      <div class="room-list-container">
+        <div class="room-header">
+          <h2>Room List</h2>
+          <ion-icon name="add"></ion-icon>
+          <ion-icon name="close"></ion-icon>
+        </div>
+        <ul id="roomList">
+          {% for room in rooms %}
+          <li>
+            {{ room.name }} {% if room.admin_id == current_user.id %}
+            <p>{{ room.code }}</p>
+            <div class="room-buttons">
+              <button class="delete-room" data-room-id="{{ room.id }}">
+                Delete
+              </button>
+              <button class="join-room" id="join">Join</button>
+            </div>
+            {% else %}
+            <div class="room-buttons">
+              <button class="join-room" id="join">Join</button>
+            </div>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-form-container" id="room-form-container">
+      <form class="form-box" method="POST">
+        <div class="title">
+          <h2>Create Room<ion-icon name="close"></ion-icon></h2>
+        </div>
+        <div class="form-group">
+          <span class="icon"><ion-icon name="logo-wechat"></ion-icon></span>
+          <input
+            type="text"
+            name="room-name"
+            id="room-name"
+            placeholder="Room Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <span class="icon"><ion-icon name="qr-code"></ion-icon></span>
+          <input
+            type="text"
+            name="code"
+            id="code"
+            placeholder="Room Code"
+            required
+            readonly
+          />
+          <a href="#" class="generate" id="generate">Generate</a>
+        </div>
+        <div class="form-group">
+          <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+            oninput="checkPasswordLength('password', 'password-checkmark')"
+          />
+          <span class="show-password" id="showPassword">
+            <span id="password-checkmark"></span>
+          </span>
+        </div>
+        <button class="create" type="submit" id="create-button">Create</button>
+      </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+  </body>
+</html>

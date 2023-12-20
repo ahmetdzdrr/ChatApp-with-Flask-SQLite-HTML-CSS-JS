@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/chat.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/confirm.css') }}">
+    <script src="{{ url_for('static', filename='js/confirm.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Password</title>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="/static/images/confirm-background.mp4" type="video/mp4">
+    </video>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <script>
+            Swal.fire({
+                   title:"{{ category.title() }}!",
+                   text: "{{ message }}",
+                   icon: "{{ category }}" == "danger" ? "error" : "{{ category }}",
+                   showConfirmButton: false,
+                   timer: 3000
+            });
+            var login_URL = "{{ url_for('confirm') }}";
+                window.location.href = login_URL;
+            </script>
+
+            {% if category != 'error' %}
+            <script>
+            setTimeout(function() {
+                var login_URL = "{{ url_for('login') }}";
+                window.location.href = login_URL;
+            }, 3500);
+            </script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <header>
+            <span class="logo-div">
+                <img class="logo" src="{{ url_for('static', filename='images/chat.png') }}" alt="">
+                <p class="logo-title">Fast<span class="rainbow-text">Chat</span></p>
+                </span>
+            <nav class="navigation">
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="">About</a>
+                <a href="">Contact</a>
+                <button class="login" id="login-button"><ion-icon name="log-in"></ion-icon>Sign In</ion-icon></button>
+                <button class="register" id="register-button"><ion-icon name="person-add"></ion-icon>Sign Up</button>
+            </nav>
+        </header>
+    <div class="confirm-form-container">
+        <form method="POST">
+            <div class="title"><h2>Password</h2></div>
+            <div class="form-group">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="text" name="mail" id="mail" required>
+            </div>
+            <div class="form-group">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="password" id="re-password" required oninput="check_PasswordLength('re-password', 're-password-checkmark')">
+                <span class="show-password" id="re-showPassword">
+                    <span id="re-password-checkmark"></span>
+                </span>
+            </div>
+            <div class="form-group">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="new_password" id="new_password" required oninput="check_PasswordLength('new_password', 'new-password-checkmark')">
+                <span class="show-password" id="new-showrePassword">
+                    <span id="new-password-checkmark"></span>
+                </span>
+            </div>
+            <button class="confirm-button" type="submit" id="confirm-button">Confirm</button>
+            </div>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/confirm.js') }}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

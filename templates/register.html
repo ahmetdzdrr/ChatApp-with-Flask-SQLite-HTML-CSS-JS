@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/register.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/chat.png') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Sign Up</title>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="/static/images/register-background.mp4" type="video/mp4">
+    </video>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <script>
+        Swal.fire({
+            title: "{{ message }}",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    {% elif category == 'success' %}
+    <script>
+        Swal.fire({
+            title: "Registration Successful!",
+            text: "{{ message }}",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3000
+        });
+        setTimeout(function () {
+            window.location.href = "/login";
+        }, 3200);  
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+            <header>
+                <span class="logo-div">
+                    <img class="logo" src="{{ url_for('static', filename='images/chat.png') }}" alt="">
+                    <p class="logo-title">Fast<span class="rainbow-text">Chat</span></p>
+                    </span>
+                </span>
+                <nav class="navigation">
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <a href="">About</a>
+                    <a href="">Contact</a>
+                    <button class="login" id="login-button"><ion-icon name="log-in"></ion-icon>Sign In</ion-icon></button>
+                    <button class="register" id="register-button"><ion-icon name="person-add"></ion-icon>Sign Up</button>
+                </nav>
+            </header>
+            <div class="login-form-container">
+                <form class="form-box" method="POST">
+                    <div class="title"><h2>Sign Up</h2></div>
+                    <div class="form-group">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" name="username" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" name="password" id="password" placeholder="Password" required oninput="checkPasswordLength('password', 'password-checkmark')">
+                        <span class="show-password" id="reg_showPassword">
+                            <span id="password-checkmark"></span>
+                        </span>
+                        
+                    </div>
+                    <div class="form-group">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" name="re_password" id="re_password" placeholder="Confirm Password" required oninput="checkPasswordLength('re_password', 're_password-checkmark')">
+                        <span class="show-password" id="reg_show_rePassword">
+                            <span id="re_password-checkmark"></span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" name="user_mail" id="user_mail" placeholder="Mail" required>
+                    </div>
+                    <button class="register" type="submit">Sign Up</button>
+                    <div class="register-link">
+                        <p>Have you already an acoount?</p> <a href="{{ url_for('login') }}">Sign In</a>
+                    </div> 
+                </form>
+            </div>
+    
+            <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

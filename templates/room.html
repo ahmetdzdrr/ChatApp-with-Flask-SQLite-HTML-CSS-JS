@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat Room</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/room.css') }}"
+    />
+  </head>
+  <body>
+    <div class="chat-container">
+      <h2 class="room-title">{{ room_name }}</h2>
+      <div class="chat-box" id="chat-box"></div>
+      <form id="message-form">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Type your message..."
+        />
+        <button type="submit" id="send-button">Sent</button>
+      </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/room.js') }}"></script>
+  </body>
+</html>
