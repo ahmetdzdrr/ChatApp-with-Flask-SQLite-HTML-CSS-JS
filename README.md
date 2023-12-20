@@ -1,4 +1,4 @@
-# Time-Series-Forecasting-Electricity-Demand
+# ChatApp-with-Flask-SQLite-HTML-CSS-JS
 
 ## **Table of Contents**
 
